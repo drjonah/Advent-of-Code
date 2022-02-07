@@ -1,6 +1,5 @@
 import time
 
-
 def getData(fileName: str) -> list():
     data = list()
 
