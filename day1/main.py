@@ -15,7 +15,7 @@ def partOne(data: list()) -> int:
     increment = 0
     storedNumber = data[0]
 
-    for number in data:
+    for number in data[1:]:
         if number > storedNumber:
             increment += 1
         storedNumber = number
