@@ -34,7 +34,6 @@ def partTwo(data: list()) -> int:
         newSum = sum(storedNumbers)
 
         if newSum > storedSum: increment += 1
-            
         storedSum = newSum
 
     return increment
