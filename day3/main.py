@@ -35,7 +35,24 @@ def partOne(data: list()) -> int:
 
 def partTwo(data: list()) -> int:
     
-    pass
+    for column in range(len(data[0])-1):
+        
+        count0, count1 = list(), list()
+        
+        for row in data:
+            
+            if (int(row[column]) == 0): count0.append(row)
+            else: count1.append(row)
+            
+        if (len(count0) > len(count1)):
+            print('0 is bigger')
+        else:
+            print('1 is bigger')
+            
+    return -1
+        
+        
+
 
 def main():
 
