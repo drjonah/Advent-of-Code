@@ -16,8 +16,7 @@ def partOne(data: list()) -> int:
     storedNumber = data[0]
 
     for number in data[1:]:
-        if number > storedNumber:
-            increment += 1
+        if number > storedNumber: increment += 1
         storedNumber = number
 
     return increment
@@ -34,9 +33,8 @@ def partTwo(data: list()) -> int:
         storedNumbers.append(number)
         newSum = sum(storedNumbers)
 
-        if newSum > storedSum:
-            increment += 1
-
+        if newSum > storedSum: increment += 1
+            
         storedSum = newSum
 
     return increment
