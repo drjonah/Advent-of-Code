@@ -9,6 +9,15 @@ def getData(fileName: str) -> list():
 
     return data
 
+def getRows(num: int, rows: list()) -> list():
+    
+    newRow = list()
+    
+    for row in rows:
+        if row[0] == num:
+            newRows.append(row[0])
+            
+    return newRow
 
 def partOne(data: list()) -> int:
 
@@ -46,8 +55,10 @@ def partTwo(data: list()) -> int:
             
         if (len(count0) > len(count1)):
             print('0 is bigger')
+            d = getRows(0, count0)
         else:
             print('1 is bigger')
+            d = getRows(1, count1)
             
     return -1
         
