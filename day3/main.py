@@ -1,4 +1,6 @@
+from itertools import count
 import time
+
 
 def getData(fileName: str) -> list():
     data = list()
@@ -9,60 +11,73 @@ def getData(fileName: str) -> list():
 
     return data
 
-def getRows(num: int, rows: list()) -> list():
-    
-    newRow = list()
-    
-    for row in rows:
-        if row[0] == num:
-            newRows.append(row[0])
-            
-    return newRow
 
 def partOne(data: list()) -> int:
 
     gammaRate, epsilonRate = '', ''
-    
+
     for column in range(len(data[0])-1):
-        
+
         count0, count1 = 0, 0
-        
+
         for row in data:
-            
-            if (int(row[column]) == 0): count0 += 1
-            else: count1 += 1
-            
+
+            if (int(row[column]) == 0):
+                count0 += 1
+            else:
+                count1 += 1
+
         if (count0 > count1):
             gammaRate += '0'
             epsilonRate += '1'
-        else: 
+        else:
             gammaRate += '1'
             epsilonRate += '0'
-    
-    return int(gammaRate,2) * int(epsilonRate,2)
-        
+
+    return int(gammaRate, 2) * int(epsilonRate, 2)
+
 
 def partTwo(data: list()) -> int:
-    
-    for column in range(len(data[0])-1):
-        
+
+    oxygenGenerator = data
+    # oxygen generator rating
+    for index in range(len(oxygenGenerator[0])-1):
+
         count0, count1 = list(), list()
-        
-        for row in data:
-            
-            if (int(row[column]) == 0): count0.append(row)
-            else: count1.append(row)
-            
+
+        for row in oxygenGenerator:
+            if (int(row[index]) == 0):
+                count0.append(row)
+            elif (int(row[index]) == 1):
+                count1.append(row)
+
         if (len(count0) > len(count1)):
-            print('0 is bigger')
-            d = getRows(0, count0)
+            oxygenGenerator = count0
         else:
-            print('1 is bigger')
-            d = getRows(1, count1)
-            
-    return -1
-        
-        
+            oxygenGenerator = count1
+
+    co2Scrubber = data
+    # CO2 scrubber rating
+    for index in range(len(co2Scrubber[0])-1):
+
+        count0, count1 = list(), list()
+
+        if (len(co2Scrubber) == 1):
+            break
+
+        for row in co2Scrubber:
+            if (int(row[index]) == 0):
+                count0.append(row)
+            elif (int(row[index]) == 1):
+                count1.append(row)
+
+        if (len(count0) > len(count1)):
+            co2Scrubber = count1
+        else:
+            co2Scrubber = count0
+
+
+    return int(oxygenGenerator[0], 2) * int(co2Scrubber[0], 2)
 
 
 def main():
