@@ -1,6 +1,6 @@
 import timeit
 
-def part1():
+def part1() -> tuple:
     """
         A: rock B: paper C: scissors
         X: rock Y: paper Z: scissors
@@ -44,7 +44,7 @@ def part1():
     # return
     return(your_score, stop-start)
 
-def part2():
+def part2()  -> tuple:
     """
         A: rock B: paper C: scissors
         X: rock Y: paper Z: scissors

@@ -1,6 +1,6 @@
 import timeit
 
-def part1():
+def part1() -> tuple:
     # start time
     start = timeit.default_timer()
     # opening file
@@ -22,7 +22,7 @@ def part1():
     # return
     return (max(calories), stop-start)
 
-def part2():
+def part2() -> tuple:
     # start time
     start = timeit.default_timer()
     # opening file

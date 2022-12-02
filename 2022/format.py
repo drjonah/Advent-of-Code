@@ -1,6 +1,6 @@
 import timeit
 
-def part1():
+def part1() -> tuple:
     # start time
     start = timeit.default_timer()
     # opening file
@@ -8,7 +8,7 @@ def part1():
     # end time
     stop = timeit.default_timer()
 
-def part2():
+def part2() -> tuple:
     # start time
     start = timeit.default_timer()
     # opening file
