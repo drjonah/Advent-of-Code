@@ -6,12 +6,12 @@ from speed import timer_func
 ###############################################################
 
 @timer_func
-def star1():
+def star1() -> None:
     # star 1
     pass
 
 @timer_func
-def star2():
+def star2() -> None:
     # star 2
     pass
 
