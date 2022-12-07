@@ -6,10 +6,11 @@ from prettyformatter import pprint
 
 ###############################################################
 
+
 @timer_func
 def star1() -> None:
     # variables
-    greatest_dir_size = 0
+    total = 0
     directory = {}
     is_ls = False
     levels = []
@@ -28,12 +29,11 @@ def star1() -> None:
                 is_ls = False
                 # going back a level
                 if file[2] == '..':
-                    level_size = levels[-1]['size']
+                    temp = levels[-1]
                     del levels[-1]
                     # resetting location unless if is on the 0th level and adding directory sizes
                     if len(levels) > 0:
                         location = levels[-1]
-                        levels[-1]['size'] += level_size
                     continue
                 # updating the current directory
                 location = directory[file[2]] if len(levels) == 0 else location[file[2]]
@@ -41,30 +41,24 @@ def star1() -> None:
             # action
             if is_ls:
                 # if on 0th level
-                # dir structure = [dir size, files]
                 if len(levels) == 0:
                     if file[0] == 'dir':
-                        directory[file[1]] = {'size': 0}
+                        directory[file[1]] = {}
                     else:
                         directory[file[1]] = int(file[0])
                 # else
                 else:
                     if file[0] == 'dir':
-                        levels[-1][file[1]] = {'size': 0}
+                        levels[-1][file[1]] = {}
                     else:
                         levels[-1][file[1]] = int(file[0])
                         # adding the new file size to directorys total
-                        for level in levels:
-                            level['size'] += int(file[0])      
+                        if int(file[0]) <= 100000:
+                            total += int(file[0])
 
         pprint(directory)
 
-        for dir in directory.values():
-            if type(dir) is dict:
-                if dir['size'] < 100000 and dir['size'] > greatest_dir_size:
-                        greatest_dir_size += dir['size']
-                        
-        print(f'Star 1: Greatest Dir Size is {greatest_dir_size}')
+        print(f'Star 1: Greatest Dir Size is {total}')
 
 
 @timer_func
