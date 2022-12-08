@@ -11,53 +11,39 @@ from prettyformatter import pprint
 def star1() -> None:
     # variables
     total = 0
-    directory = {}
-    is_ls = False
-    levels = []
-    location = {}
+    directory = {'./': 0}
+    current_dir = './'
     # run #
-    # fill directory
     with open('data.txt', 'r') as FILE:
         for line in FILE.readlines():
             file = line.strip().split(' ')
-            # switching to list mode
-            if file[1] == 'ls':
-                is_ls = True
-                continue
-            # switching to moving directory modes
-            if file[1] == 'cd' and file[2] != '/':
-                is_ls = False
-                # going back a level
-                if file[2] == '..':
-                    temp = levels[-1]
-                    del levels[-1]
-                    # resetting location unless if is on the 0th level and adding directory sizes
-                    if len(levels) > 0:
-                        location = levels[-1]
+            # cd
+            if file[1] == 'cd':
+                # init
+                if file[2] == '/':
                     continue
-                # updating the current directory
-                location = directory[file[2]] if len(levels) == 0 else location[file[2]]
-                levels.append(location)
-            # action
-            if is_ls:
-                # if on 0th level
-                if len(levels) == 0:
-                    if file[0] == 'dir':
-                        directory[file[1]] = {}
-                    else:
-                        directory[file[1]] = int(file[0])
-                # else
+                # backwards 
+                if file[2] == '..':
+                    new_dir = ('/').join(current_dir.split('/')[:-2]) + '/'
+                    directory[new_dir] += directory[current_dir]
+                    current_dir = new_dir
+                    continue
+                # enters dir
                 else:
-                    if file[0] == 'dir':
-                        levels[-1][file[1]] = {}
-                    else:
-                        levels[-1][file[1]] = int(file[0])
-                        # adding the new file size to directorys total
-                        if int(file[0]) <= 100000:
-                            total += int(file[0])
-
-        pprint(directory)
-
+                    current_dir += f'{file[2]}/'
+                    continue
+            # ls
+            if file[1] == 'ls':
+                continue
+            # action
+            if file[0] == 'dir':
+                directory[current_dir + f'{file[1]}/'] = 0
+            else:
+                directory[current_dir] += int(file[0])
+        # add file sizes
+        for file_size in directory.values():
+            if file_size < 100000:
+                total += file_size
         print(f'Star 1: Greatest Dir Size is {total}')
 
 
