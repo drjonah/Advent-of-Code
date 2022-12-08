@@ -49,7 +49,6 @@ def star1() -> None:
 @timer_func
 def star2() -> None:
     # variables
-    total = 0
     directory = {'./': 0}
     current_dir = './'
     # run #
@@ -78,11 +77,12 @@ def star2() -> None:
                     temp_dir += file_dir + '/'
                     directory[temp_dir] += int(file[0])
         # add file sizes
+        total = 1000000000000000000
         total_disk = 70000000
         required = 30000000
         available = total_disk - directory['./']
         for file_size in directory.values():
-            if (available + file_size) >= required and file_size < total_disk:
+            if (available + file_size) >= required and file_size < total:
                 total = file_size
         print(f'Star 2: Greatest Dir Size is {total}')
 
